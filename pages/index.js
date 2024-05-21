@@ -1,4 +1,5 @@
 import HomePage from "../components/HomePage"
+import withAuth from "../components/withAuth"
 
 const Page=()=> {
     return (
@@ -8,4 +9,4 @@ const Page=()=> {
     )
   }
 
-  export default Page
+  export default withAuth(Page)
