@@ -21,7 +21,6 @@ import {
 } from "@mui/material";
 import { saveAs } from "file-saver";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useAuth0 } from "@auth0/auth0-react";
 
 const theme = createTheme({
   palette: {
@@ -49,7 +48,6 @@ const HomePage = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [totalCount, setTotalCount] = useState(0);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
-  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -76,7 +74,7 @@ const HomePage = () => {
     setPage(1);
   };
 
-  const handlePageChange = (value) => {
+  const handlePageChange = (event ,value) => {
     setPage(value);
   };
 
@@ -137,12 +135,6 @@ const HomePage = () => {
           <Typography variant="h5" color="white">
             Book Explorer
           </Typography>
-          {console.log("Is authenticated:", isAuthenticated)}
-          {isAuthenticated ? (
-            <Button color="inherit" onClick={() => logout()}>Logout</Button>
-          ) : (
-            <Button onClick={() => loginWithRedirect()}>Login</Button>
-          )}
         </Toolbar>
       </AppBar>
       <Container maxWidth="xl">
