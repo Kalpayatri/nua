@@ -21,6 +21,9 @@ import {
 } from "@mui/material";
 import { saveAs } from "file-saver";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import LoginButton from "./LoginButton";
+import LogoutButton from "./LogoutButton";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const theme = createTheme({
   palette: {
@@ -48,6 +51,7 @@ const HomePage = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [totalCount, setTotalCount] = useState(0);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -126,6 +130,10 @@ const HomePage = () => {
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
     saveAs(blob, "books.csv");
   };
+  if (!isAuthenticated) {
+    loginWithRedirect();
+    return null;
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -135,6 +143,9 @@ const HomePage = () => {
           <Typography variant="h5" color="white">
             Book Explorer
           </Typography>
+          <div style={{ marginLeft: "auto" }}>
+            <LogoutButton />
+          </div>
         </Toolbar>
       </AppBar>
       <Container maxWidth="xl">
