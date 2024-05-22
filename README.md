@@ -8,7 +8,7 @@ Book Explorer is a React application that fetches and displays information about
 - Sort books by different attributes
 - Paginate through books
 - Download book data as a CSV file
-- -Auth is added
+- Auth is added
 
 ## Getting Started
 
